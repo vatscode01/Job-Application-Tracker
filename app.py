@@ -1,30 +1,14 @@
-from typing import Optional
-from datetime import date
-from sqlalchemy import create_engine, String, Date
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from flask import Flask
 
-# 1. Connect to the database engine
-# SQLite automatically generates the 'example.db' file if it is missing
-engine = create_engine("sqlite:///example.db", echo=True)
+app = Flask(__name__)
 
-# 2. Define the declarative base class
-class Base(DeclarativeBase):
-    pass
+@app.route("/")
+def hello_world():
+    return "<h1>Job quest tracker is alive</h1>"
 
-# 3. Create your database model (Table schema)
-class User(Base):
-    __tablename__ = "applications"
-    
-    id: Mapped[int] = mapped_column(primary_key=True)
-    company: Mapped[str] = mapped_column(String(50), unique=True, nullable=False)
-    role: Mapped[Optional[str]] = mapped_column(String(50))
-    status: Mapped[Optional[str]] = mapped_column(String(50))
-    date_applied: Mapped[Optional[date]] = mapped_column(Date)
-    notes: Mapped[Optional[str]] = mapped_column(String(100))
-    extracted_skills: Mapped[Optional[str]] = mapped_column(String(100))
 
-# 4. Generate the database file and tables
-if __name__ == "__main__":
-    # This reads all classes inheriting from Base and builds the tables
-    Base.metadata.create_all(engine)
-    print("Database and tables created successfully!")
+if (__name__ == "__main__"):
+    app.run(debug=True)
+
+
+
