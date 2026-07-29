@@ -31,7 +31,9 @@
 
 from sqlalchemy import create_engine, MetaData, Table, Integer, String, Column, Date
 
-engine = create_engine("sqlite:///example.db", echo=True)
+# engine = create_engine("sqlite:///new_example.db", echo=True)
+# engine = create_engine("postgresql+psycopg2://postgres:aady_02@localhost:5432/job_tracker.db, echo = True")
+engine = create_engine("postgresql+psycopg2://postgres:aady_02@localhost:5432/job_tracker", echo=True)
 
 meta = MetaData()
 
@@ -43,11 +45,19 @@ applications = Table(
     meta,
     Column('id', Integer, primary_key=True),
     Column('company', String, nullable=False),
-    Column('date_applied', Date)
-
+    Column('role', String),
+    Column('date_applied', Date),
+    Column('extracted_skills', String),
+    Column('notes', String)
 )
 
 meta.create_all(engine)
+
+# conn = engine.connect()
+
+
+
+# conn.commit()
 
 
 
