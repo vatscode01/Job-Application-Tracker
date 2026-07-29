@@ -29,15 +29,25 @@
 #     Base.metadata.create_all(engine)
 #     print("Database and tables created successfully!")
 
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine, MetaData, Table, Integer, String, Column, Date
 
-engine = create_engine("sqlite:///mydatabase.db", echo = True)
+engine = create_engine("sqlite:///example.db", echo=True)
 
-conn = engine.connect()
+meta = MetaData()
 
-conn.execute(text("create table if not exists application (company str , role str , status str);"))
+# id , company , role , status (applied/interview/offer/
+# rejected), date_applied , notes , extracted_skills
 
-conn.commit()
+applications = Table(
+    "applications",
+    meta,
+    Column('id', Integer, primary_key=True),
+    Column('company', String, nullable=False),
+    Column('date_applied', Date)
+
+)
+
+meta.create_all(engine)
 
 
 
