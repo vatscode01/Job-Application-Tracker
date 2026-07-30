@@ -29,12 +29,9 @@
 #     Base.metadata.create_all(engine)
 #     print("Database and tables created successfully!")
 
-from sqlalchemy import create_engine, MetaData, Table, Integer, String, Column, Date
+from sqlalchemy import create_engine, MetaData, Table, Integer, String, Column, Date, JSON
 
-# engine = create_engine("sqlite:///new_example.db", echo=True)
-# engine = create_engine("postgresql+psycopg2://postgres:aady_02@localhost:5432/job_tracker.db, echo = True")
-engine = create_engine("postgresql+psycopg2://postgres:aady_02@localhost:5432/job_tracker", echo=True)
-
+engine = create_engine("sqlite:///job_tracker.db", echo = True)
 meta = MetaData()
 
 # id , company , role , status (applied/interview/offer/
@@ -46,18 +43,31 @@ applications = Table(
     Column('id', Integer, primary_key=True),
     Column('company', String, nullable=False),
     Column('role', String),
+    Column('status', String),       #(applied/interview/offer/rejected)
     Column('date_applied', Date),
-    Column('extracted_skills', String),
-    Column('notes', String)
+    Column('extracted_skills', JSON),
+    Column('notes', String, nullable=True)      #Default = True
 )
 
 meta.create_all(engine)
+conn = engine.connect()
 
-# conn = engine.connect()
+# id , company , role , status (applied/interview/offer/
+# rejected), date_applied , notes , extracted_skills
 
+insert_statement = applications.insert().values(
+    # company = 'Amazon',
+    # role = "SDE",
+    # status = 'Applied',
+    # date_applied = '2025-04-03',
+    # extracted_skills = ['Python','AWS'],
+    # notes = 'NA'
 
+    'Amazon', 'SDE', 'Applied', '2025-05-03', ['Python','AWS'], 'NA'
+)
 
-# conn.commit()
+conn.execute(insert_statement)
 
+conn.commit()
 
 
