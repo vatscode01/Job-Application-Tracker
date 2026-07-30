@@ -56,13 +56,6 @@ conn = engine.connect()
 # rejected), date_applied , notes , extracted_skills
 
 insert_statement = applications.insert().values(
-    # company = 'Amazon',
-    # role = "SDE",
-    # status = 'Applied',
-    # date_applied = '2025-04-03',
-    # extracted_skills = ['Python','AWS'],
-    # notes = 'NA'
-
     'Amazon', 'SDE', 'Applied', '2025-05-03', ['Python','AWS'], 'NA'
 )
 
