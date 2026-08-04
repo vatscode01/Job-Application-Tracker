@@ -21,12 +21,10 @@ applications = Table(
 meta.create_all(engine)
 conn = engine.connect()
 
-# id , company , role , status (applied/interview/offer/
-# rejected), date_applied , notes , extracted_skills
-
 insert_statement = applications.insert().values(
     'Amazon', 'SDE', 'Applied', '2025-05-03', ['Python','AWS'], 'NA'
 )
+# I have entered 3 more values into the applications table directly from terminal.
 
 conn.execute(insert_statement)
 
