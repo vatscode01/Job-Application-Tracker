@@ -21,12 +21,17 @@ applications = Table(
 meta.create_all(engine)
 conn = engine.connect()
 
-insert_statement = applications.insert().values(
-    'Amazon', 'SDE', 'Applied', '2025-05-03', ['Python','AWS'], 'NA'
-)
+# insert_statement = applications.insert().values(
+#     'Amazon', 'SDE', 'Applied', '2025-05-03', ['Python','AWS'], 'NA'
+# )
 # I have entered 3 more values into the applications table directly from terminal.
 
-conn.execute(insert_statement)
+# conn.execute(insert_statement)
+
+from sqlalchemy import text
+
+select_statement = text('select * from applications;')
+print(conn.execute(select_statement))
 
 conn.commit()
 
