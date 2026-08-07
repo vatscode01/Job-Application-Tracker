@@ -1,0 +1,38 @@
+[
+    {
+        "id":1,
+        "company":"Amazon",
+        "role":"SDE",
+        "status":"Applied",
+        "date_applied":"2025-05-03",
+        "extracted_skills":"[\"Python\",\"AWS\"]",
+        "notes":"NA"
+    },
+    {
+        "id":2,
+        "company":"Microsoft",
+        "role":"SDE",
+        "status":"Applied",
+        "date_applied":"2025-06-15",
+        "extracted_skills":null,
+        "notes":null
+    },
+    {
+        "id":3,
+        "company":"Amazon",
+        "role":"AWS Developer",
+        "status":"Applied",
+        "date_applied":"2024-10-05",
+        "extracted_skills":"[\"Java\", \"AWS\", \"Flask\"]",
+        "notes":"NA"
+    },
+    {
+        "id":4,
+        "company":"Nutanix",
+        "role":"Backend Developer",
+        "status":"Interviewed",
+        "date_applied":"2024-10-15",
+        "extracted_skills":"[\"NodeJS\", \"Flask\"]",
+        "notes":"Referral"
+    }
+]
