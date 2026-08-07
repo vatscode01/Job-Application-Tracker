@@ -1,10 +1,8 @@
-from sqlalchemy import create_engine, MetaData, Table, Integer, String, Column, Date, JSON
+from sqlalchemy import create_engine, MetaData, Table, Integer, String, Column, Date, JSON, text
+import sqlite3, json
 
 engine = create_engine("sqlite:///job_tracker.db", echo = True)
 meta = MetaData()
-
-# id , company , role , status (applied/interview/offer/
-# rejected), date_applied , notes , extracted_skills
 
 applications = Table(
     "applications",
@@ -21,19 +19,14 @@ applications = Table(
 meta.create_all(engine)
 conn = engine.connect()
 
-# insert_statement = applications.insert().values(
-#     'Amazon', 'SDE', 'Applied', '2025-05-03', ['Python','AWS'], 'NA'
-# )
-# I have entered 3 more values into the applications table directly from terminal.
+conn.row_factory = sqlite3.Row
+cursor = conn.cursor()
 
-# conn.execute(insert_statement)
+cursor.execute("select * from job_tracker;")
+rows = cursor.fetchall()
 
-from sqlalchemy import text
+data = [dict(row) for row in rows]
+with open("output.json", "w", encoding="utf-8") as json_file:
+    json.dump(data, json_file, indent=4)
 
-select_statement = text('select * from applications;')
-print(conn.execute(select_statement))
-
-conn.commit()
-
-
-
+conn.close()
