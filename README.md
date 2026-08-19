@@ -983,6 +983,7 @@ LinkedIn: `<YOUR_LINKEDIN_PROFILE>`
 
 **Analytics:** Pandas
 
-**AI:** OpenAI API *(Optional)*
+**AI:** OpenAI API
 
-**Containerization:** Docker *(Optional)*
+**Containerization:** Docker
+
