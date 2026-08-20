@@ -1,5 +1,6 @@
-import sqlite3, pandas as pd
+# Fetch the data from the database and save it as a JSON file   
 
+import sqlite3, pandas as pd
 conn = sqlite3.connect("job_tracker.db")
 
 table_name = "applications"
