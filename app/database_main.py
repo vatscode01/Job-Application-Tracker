@@ -20,25 +20,19 @@ def create_table(table_name):
     """)
     conn.commit()
 
+def insert_application(company, role=str, date_applied=None, extracted_skills=None, deadline=None, status = None, notes= None):
+    cur.execute("""
+        insert into Applications(company, role, date_applied, extracted_skills, deadline, status, notes)
+        values (?,?,?,?,?,?,?);
+    """,(company, role, date_applied, extracted_skills, deadline, status, notes))
+    # conn.commit
 
 def get_applications():
     cur.execute("select * from Applications;")
-    row = cur.fetchall()
-    print(row)
-
-# def insert_application(id, company, role, date_applied, extracted_skills, deadline, status, notes):
-#     cur.execute(f"""
-#         insert into Applications values({id},{company},{role},{status},{date_applied},{extracted_skills},{deadline},{status},{notes})
-#     """)
-#     conn.commit();
-
-def insert_application():
-    cur.execute(f"""
-        insert into Applications values
-        (1,'Amazon','SDE','2025-05-03','["Python","AWS"]','2025-08-05','Applied','NA')
-    """)
-    conn.commit();
+    rows = cur.fetchall()
+    for row in rows:
+        print(row)
 
 create_table("Applications")
+insert_application('Google','2025-06-15','2025-08-05','Not Applied','NA')
 get_applications()
-# insert_application(1,'Amazon','SDE','2025-05-03','["Python","AWS"]','2025-08-05','Applied','NA')
