@@ -30,12 +30,27 @@ def insert_application(company=None, role=None, date_applied=None, extracted_ski
     """,(company, role, date_applied, extracted_skills, deadline, status, notes))
     conn.commit() 
 
-def get_applications():
+def get_applications(id):
+    cur.execute(f"select * from Applications where id={id};")
+    row = cur.fetchone()
+    print(row)
+
+def update_application(id, company, role, date_applied, extracted_skills, deadline, status, notes):
+    cur.execute(f"update Applications set company='{company}',role='{role}', date_applied='{date_applied}', extracted_skills='{extracted_skills}', deadline='{deadline}', status='{status}', notes='{notes}' where id={id};")
+    conn.commit()
+
+def delete_application(id):
+    cur.execute(f"delete from Applications where id={id}")
+    conn.commit()
+
+def print_applications():
     cur.execute("select * from Applications;")
     rows = cur.fetchall()
     for row in rows:
         print(row)
 
 create_table("Applications")
-insert_application('Google',None,'2025-06-15',None,'2025-08-05','Not Applied','NA')
-get_applications()
+# update_application(3,'Google','SWE','2025-06-15',None,'2025-09-05','Not Applied','NA')
+# insert_application('Google','SWE','2025-06-15',None,'2025-09-05','Not Applied','NA')
+print_applications()
+
