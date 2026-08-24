@@ -959,7 +959,7 @@ A concise resume description for the completed project:
 
 ## 👨‍💻 Author
 
-**Your Name**
+**Ayush Vats**
 
 GitHub: https://github.com/vatscode01
 
