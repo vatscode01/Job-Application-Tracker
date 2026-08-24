@@ -20,12 +20,15 @@ def create_table(table_name):
     """)
     conn.commit()
 
-def insert_application(company, role=str, date_applied=None, extracted_skills=None, deadline=None, status = None, notes= None):
+def insert_application(company=None, role=None, date_applied=None, extracted_skills=None, deadline=None, status = None, notes= None):
+
+    if not isinstance(company,str):
+        raise TypeError(f"Expected string type but got {type(company).__name__}")
     cur.execute("""
         insert into Applications(company, role, date_applied, extracted_skills, deadline, status, notes)
         values (?,?,?,?,?,?,?);
     """,(company, role, date_applied, extracted_skills, deadline, status, notes))
-    # conn.commit
+    conn.commit() 
 
 def get_applications():
     cur.execute("select * from Applications;")
@@ -34,5 +37,5 @@ def get_applications():
         print(row)
 
 create_table("Applications")
-insert_application('Google','2025-06-15','2025-08-05','Not Applied','NA')
+insert_application('Google',None,'2025-06-15',None,'2025-08-05','Not Applied','NA')
 get_applications()
