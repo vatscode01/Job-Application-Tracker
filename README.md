@@ -961,9 +961,9 @@ A concise resume description for the completed project:
 
 **Your Name**
 
-GitHub: `<YOUR_GITHUB_PROFILE>`
+GitHub: https://github.com/vatscode01
 
-LinkedIn: `<YOUR_LINKEDIN_PROFILE>`
+LinkedIn: https://www.linkedin.com/in/ayushvats952/
 
 ---
 
