@@ -24,6 +24,7 @@ def insert_application(company=None, role=None, date_applied=None, extracted_ski
 
     if not isinstance(company,str):
         raise TypeError(f"Expected string type but got {type(company).__name__}")
+    
     cur.execute("""
         insert into Applications(company, role, date_applied, extracted_skills, deadline, status, notes)
         values (?,?,?,?,?,?,?);
