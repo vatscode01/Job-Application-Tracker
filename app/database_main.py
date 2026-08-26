@@ -1,7 +1,7 @@
 
 # Create Database
 
-import sqlite3
+import sqlite3, pandas as pd
 
 conn = sqlite3.connect("database/job_tracker.db")
 cur = conn.cursor()
@@ -44,14 +44,17 @@ def delete_application(id):
     cur.execute(f"delete from Applications where id={id}")
     conn.commit()
 
-def print_applications():
+def print_applications(flag):
     cur.execute("select * from Applications;")
     rows = cur.fetchall()
+    if(flag==True):
+        return rows
+    
     for row in rows:
         print(row)
+    # return pd.DataFrame(rows)
 
 create_table("Applications")
 # update_application(3,'Google','SWE','2025-06-15',None,'2025-09-05','Not Applied','NA')
 # insert_application('Google','SWE','2025-06-15',None,'2025-09-05','Not Applied','NA')
-print_applications()
-
+# print_applications(False)
