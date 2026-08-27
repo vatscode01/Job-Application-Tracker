@@ -44,15 +44,18 @@ def delete_application(id):
     cur.execute(f"delete from Applications where id={id}")
     conn.commit()
 
-def print_applications(flag):
+# Not useful
+def print_applications():
     cur.execute("select * from Applications;")
     rows = cur.fetchall()
-    if(flag==True):
-        return rows
-    
     for row in rows:
         print(row)
     # return pd.DataFrame(rows)
+
+def return_applications():
+    df = pd.read_sql_query("select * from Applications;", conn)
+    conn.close()
+    return df
 
 create_table("Applications")
 # update_application(3,'Google','SWE','2025-06-15',None,'2025-09-05','Not Applied','NA')
