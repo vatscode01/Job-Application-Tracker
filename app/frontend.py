@@ -1,8 +1,5 @@
-import streamlit as st, sqlite3
-import pandas as pd
-from datetime import date
+import streamlit as st
 
-# from database_main import print_applications
 from read_application import get_applications
 from read_application import insert_application
 
@@ -38,18 +35,7 @@ with st.form('application_data',clear_on_submit=True):
 
     submitted = st.form_submit_button("Submit")
     if(submitted):
-        # insert_application(company, role, date_applied, extracted_skills, deadline, status, notes)
-        df = get_applications()
-        conn = sqlite3.connect("database/job_tracker.db")
-        # cur = conn.cursor()
-        # cur.execute("""
-        #     insert into Applications(company, role, date_applied, extracted_skills, deadline, status, notes)
-        #     values (?,?,?,?,?,?,?);
-        # """,(company, role, date_applied, extracted_skills, deadline, status, notes))
-        # conn.commit()
-        # conn.close()
         insert_application(company, role, date_applied, extracted_skills, deadline, status, notes)
-        st.write("Form Submitted Succesfully")
-        # st.write(f"Company: {company}")
+        st.success('Form Submitted Succesfully', icon="✅")
 
 
