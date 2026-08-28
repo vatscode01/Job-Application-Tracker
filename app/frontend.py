@@ -7,7 +7,9 @@ from read_application import insert_application
 df = get_applications()
 df.drop(columns=['id'],inplace=True)
 
-st.title("Job Application Tracker")
+st.title("**Job Application Tracker**")
+
+# st.link_button(url = "https://localhost:8501/add_application", label = "Exteranl Link")
 
 # Show Table
 st.dataframe(
