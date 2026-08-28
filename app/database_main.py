@@ -52,10 +52,6 @@ def print_applications():
         print(row)
     # return pd.DataFrame(rows)
 
-def return_applications():
-    df = pd.read_sql_query("select * from Applications;", conn)
-    conn.close()
-    return df
 
 create_table("Applications")
 # update_application(3,'Google','SWE','2025-06-15',None,'2025-09-05','Not Applied','NA')
