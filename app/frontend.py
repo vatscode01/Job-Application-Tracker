@@ -1,11 +1,11 @@
 import streamlit as st
 
-from read_application import get_applications
-from read_application import insert_application
+from read_application import get_applications, insert_application
+from read_application import delete_application
 
 # df = print_applications(True)
 df = get_applications()
-df.drop(columns=['id'],inplace=True)
+# df.drop(columns=['id'],inplace=True)
 
 st.title("**Job Application Tracker**")
 
@@ -23,7 +23,8 @@ st.dataframe(
         'deadline':'Deadline',
         'status' : 'Status',
         'notes': 'Notes'
-    }
+    },
+    selection_mode = 'single-row'
 )
 
 with st.form('application_data',clear_on_submit=True):
@@ -32,12 +33,11 @@ with st.form('application_data',clear_on_submit=True):
     date_applied = st.date_input(label = 'Date Applied',value = "today")
     extracted_skills = st.text_input(label = 'Extracted Skills', placeholder='Enter a valid input')
     deadline = st.date_input(label = 'Application Deadline', value = "today")
-    status = st.text_input(label = 'Status', placeholder='Enter a valid input')
+    status = st.selectbox(label= "Select options", options=['Applied','Not Applied','Interviewed','Selected','Not Selected'])
     notes = st.text_input(label = 'Notes', placeholder='Enter a valid input')
 
     submitted = st.form_submit_button("Submit")
     if(submitted):
         insert_application(company, role, date_applied, extracted_skills, deadline, status, notes)
         st.success('Form Submitted Succesfully', icon="✅")
-
 

@@ -20,3 +20,11 @@ def insert_application(company=None, role=None, date_applied=None, extracted_ski
     conn.commit() 
     conn.close()
     pass
+
+def delete_application(id):
+    conn = sqlite3.connect("database/job_tracker.db")
+    cur = conn.cursor()
+    cur.execute(f"delete from Applications where id={id}")
+    conn.commit()
+    conn.close()
+    pass
