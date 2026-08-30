@@ -11,12 +11,12 @@ st.title("**Job Application Tracker**")
 
 # st.link_button(url = "https://localhost:8501/add_application", label = "Exteranl Link")
 
-# Show Table
-st.dataframe(
+edited_df = st.data_editor(
     data = df,
     hide_index=True,
     column_config={
-        'company':'Company Name',
+        'id': 'ID',
+        'company': st.column_config.Column("Company Name", required=True,),
         'role':'Job Role',
         'date_applied':'Date Applied',
         'extracted_skills':'Extracted Skills',
@@ -24,8 +24,17 @@ st.dataframe(
         'status' : 'Status',
         'notes': 'Notes'
     },
-    selection_mode = 'single-row'
+    disabled=['id'],
+    num_rows = 'dynamic',
+    key = 'applications',
 )
+
+if(st.button("Submit")):
+    changes = st.session_state('edited_df')
+    st.write(changes)
+
+
+st.sidebar.markdown('<h1>Frontend</h1>')
 
 with st.form('application_data',clear_on_submit=True):
     company = st.text_input(label = 'Company Name', placeholder='Enter a valid input')
