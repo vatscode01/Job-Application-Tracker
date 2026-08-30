@@ -9,8 +9,6 @@ df = get_applications()
 
 st.title("**Job Application Tracker**")
 
-# st.link_button(url = "https://localhost:8501/add_application", label = "Exteranl Link")
-
 edited_df = st.data_editor(
     data = df,
     hide_index=True,
