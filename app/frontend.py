@@ -66,7 +66,7 @@ if(st.button("Submit")):
             row_id = df.iloc[row_idx]["id"]
 
             conn.execute(
-                "DELETE FROM users WHERE id = ?",
+                "DELETE FROM Applications WHERE id = ?",
                 (row_id,)
             )
 
@@ -74,7 +74,15 @@ if(st.button("Submit")):
         # Added rows
         # -------------------------
         for row in edits["added_rows"]:
-            insert_application('{company}', '{role}', '{date_applied}', '{extracted_skills}', '{deadline}', '{status}', '{notes}')
+            insert_application(
+                company=row.get('company'),
+                role=row.get('role'),
+                date_applied=row.get('date_applied'),
+                extracted_skills=row.get('extracted_skills'),
+                deadline=row.get('deadline'),
+                status=row.get('status'),
+                notes=row.get('notes')
+            )
 
         conn.commit()
         st.success("Changes saved successfully!")
