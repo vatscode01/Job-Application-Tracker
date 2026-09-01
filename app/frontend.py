@@ -1,4 +1,4 @@
-import streamlit as st
+import streamlit as st, sqlite3
 
 from read_application import get_applications, insert_application
 from read_application import delete_application
@@ -24,12 +24,70 @@ edited_df = st.data_editor(
     },
     disabled=['id'],
     num_rows = 'dynamic',
-    key = 'applications',
+    key = 'editor',
 )
 
 if(st.button("Submit")):
-    changes = st.session_state('edited_df')
-    st.write(changes)
+    edits = st.session_state["editor"]
+    
+    conn = sqlite3.connect("database/job_tracker.db")
+    
+    try:
+        # -------------------------
+        # Updated cells
+        # -------------------------
+        for row_idx, changes in edits["edited_rows"].items():
+    
+            row_id = df.iloc[row_idx]["id"]
+
+            # Only update the columns that actually changed
+            for column, new_value in changes.items():
+
+                # Don't allow the primary key to be changed
+                if column == "id":
+                    continue
+
+                query = f"""
+                    UPDATE Applications
+                    SET "{colummn}" = ?
+                    WHERE id = ?
+                """
+
+                conn.execute(
+                    query,
+                    (new_value, row_id)
+                )
+
+        # -------------------------
+        # Deleted rows
+        # -------------------------
+        for row_idx in edits["deleted_rows"]:
+
+            row_id = df.iloc[row_idx]["id"]
+
+            conn.execute(
+                "DELETE FROM users WHERE id = ?",
+                (row_id,)
+            )
+
+        # -------------------------
+        # Added rows
+        # -------------------------
+        for row in edits["added_rows"]:
+            insert_application('{company}', '{role}', '{date_applied}', '{extracted_skills}', '{deadline}', '{status}', '{notes}')
+
+        conn.commit()
+        st.success("Changes saved successfully!")
+
+    except Exception as e:
+        conn.rollback()
+        st.error(f"Failed to save changes: {e}")
+
+    finally:
+        conn.close()
+
+    # Reload the data so the editor reflects the database
+    st.rerun()
 
 
 st.sidebar.markdown('<h1>Frontend</h1>')
@@ -47,4 +105,6 @@ with st.form('application_data',clear_on_submit=True):
     if(submitted):
         insert_application(company, role, date_applied, extracted_skills, deadline, status, notes)
         st.success('Form Submitted Succesfully', icon="✅")
+
+
 
