@@ -49,7 +49,7 @@ if(st.button("Submit")):
 
                 query = f"""
                     UPDATE Applications
-                    SET "{colummn}" = ?
+                    SET "{column}" = ?
                     WHERE id = ?
                 """
 
@@ -105,6 +105,5 @@ with st.form('application_data',clear_on_submit=True):
     if(submitted):
         insert_application(company, role, date_applied, extracted_skills, deadline, status, notes)
         st.success('Form Submitted Succesfully', icon="✅")
-
 
 
