@@ -1,7 +1,7 @@
-import streamlit as st, sqlite3
+import streamlit as st, sqlite3, json, pandas as pd
 
 from read_application import get_applications, insert_application
-from read_application import delete_application
+from datetime import date
 
 # df = print_applications(True)
 df = get_applications()
@@ -9,17 +9,20 @@ df = get_applications()
 
 st.title("**Job Application Tracker**")
 
+df["date_applied"] = pd.to_datetime(df["date_applied"], errors='coerce').dt.date
+df["deadline"] = pd.to_datetime(df["deadline"], errors='coerce').dt.date
+
 edited_df = st.data_editor(
     data = df,
     hide_index=True,
     column_config={
         'id': 'ID',
-        'company': st.column_config.Column("Company Name", required=True,),
+        'company': st.column_config.Column("Company", required=True,),
         'role':'Job Role',
-        'date_applied':'Date Applied',
+        'date_applied': st.column_config.DateColumn("Date Applied"),
         'extracted_skills':'Extracted Skills',
-        'deadline':'Deadline',
-        'status' : 'Status',
+        'deadline': st.column_config.DateColumn("Deadline"),
+        'status' : st.column_config.SelectboxColumn("Status", options=['Applied','Not Applied','Interviewed','Selected','Not Selected'], default="Applied", required=True),
         'notes': 'Notes'
     },
     disabled=['id'],
@@ -47,6 +50,9 @@ if(st.button("Submit")):
                 # Don't allow the primary key to be changed
                 if column == "id":
                     continue
+                
+                if column == "extracted_skills" and isinstance(new_value, str):
+                    new_value = json.dumps([s.strip() for s in new_value.split(',') if s.strip()])
 
                 query = f"""
                     UPDATE Applications
@@ -82,7 +88,7 @@ if(st.button("Submit")):
                 row.get('company', ''),
                 row.get('role', ''),
                 row.get('date_applied', ''),
-                row.get('extracted_skills', ''),
+                json.dumps([s.strip() for s in row.get('extracted_skills', '').split(',') if s.strip()]) if row.get('extracted_skills') else "[]",
                 row.get('deadline', ''),
                 row.get('status', ''),
                 row.get('notes', '')
@@ -105,7 +111,7 @@ if(st.button("Submit")):
         st.rerun()
 
 
-st.sidebar.markdown('<h1>Frontend</h1>')
+st.sidebar.header("First page")
 
 with st.form('application_data',clear_on_submit=True):
     company = st.text_input(label = 'Company Name', placeholder='Enter a valid input')
@@ -118,7 +124,8 @@ with st.form('application_data',clear_on_submit=True):
 
     submitted = st.form_submit_button("Submit")
     if(submitted):
-        insert_application(company, role, date_applied, extracted_skills, deadline, status, notes)
+        extracted_skills_json = json.dumps([s.strip() for s in extracted_skills.split(',') if s.strip()]) if extracted_skills else "[]"
+        insert_application(company, role, date_applied, extracted_skills_json, deadline, status, notes)
         st.success('Form Submitted Succesfully', icon="✅")
 
 

@@ -12,9 +12,9 @@ def create_table(table_name):
         id INTEGER primary key,
         company TEXT NOT NULL,
         role TEXT,
-        date_applied DATE,
+        date_applied text,
         extracted_skills JSON,
-        deadline DATE,
+        deadline text,
         status TEXT,
         notes TEXT)
     """)
