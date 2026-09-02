@@ -32,13 +32,14 @@ if(st.button("Submit")):
     
     conn = sqlite3.connect("database/job_tracker.db")
     
+    success = False
     try:
         # -------------------------
         # Updated cells
         # -------------------------
         for row_idx, changes in edits["edited_rows"].items():
     
-            row_id = df.iloc[row_idx]["id"]
+            row_id = int(df.iloc[row_idx]["id"])
 
             # Only update the columns that actually changed
             for column, new_value in changes.items():
@@ -63,7 +64,7 @@ if(st.button("Submit")):
         # -------------------------
         for row_idx in edits["deleted_rows"]:
 
-            row_id = df.iloc[row_idx]["id"]
+            row_id = int(df.iloc[row_idx]["id"])
 
             conn.execute(
                 "DELETE FROM Applications WHERE id = ?",
@@ -74,18 +75,22 @@ if(st.button("Submit")):
         # Added rows
         # -------------------------
         for row in edits["added_rows"]:
-            insert_application(
-                company=row.get('company'),
-                role=row.get('role'),
-                date_applied=row.get('date_applied'),
-                extracted_skills=row.get('extracted_skills'),
-                deadline=row.get('deadline'),
-                status=row.get('status'),
-                notes=row.get('notes')
-            )
+            conn.execute("""
+                INSERT INTO Applications(company, role, date_applied, extracted_skills, deadline, status, notes)
+                VALUES (?,?,?,?,?,?,?)
+            """, (
+                row.get('company', ''),
+                row.get('role', ''),
+                row.get('date_applied', ''),
+                row.get('extracted_skills', ''),
+                row.get('deadline', ''),
+                row.get('status', ''),
+                row.get('notes', '')
+            ))
 
         conn.commit()
         st.success("Changes saved successfully!")
+        success = True
 
     except Exception as e:
         conn.rollback()
@@ -95,7 +100,9 @@ if(st.button("Submit")):
         conn.close()
 
     # Reload the data so the editor reflects the database
-    st.rerun()
+    if success:
+        st.success("Changes Updated")
+        st.rerun()
 
 
 st.sidebar.markdown('<h1>Frontend</h1>')
