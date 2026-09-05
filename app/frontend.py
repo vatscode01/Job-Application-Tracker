@@ -1,11 +1,11 @@
 import streamlit as st, sqlite3, json, pandas as pd
 
 from read_application import get_applications, insert_application
-from datetime import date
 
 # df = print_applications(True)
 df = get_applications()
 # df.drop(columns=['id'],inplace=True)
+
 
 st.title("**Job Application Tracker**")
 
@@ -18,11 +18,11 @@ edited_df = st.data_editor(
     column_config={
         'id': 'ID',
         'company': st.column_config.Column("Company", required=True,),
+        'status' : st.column_config.SelectboxColumn("Status", options=['Applied','Not Applied','Interviewed','Selected','Not Selected'], default="Applied", required=True),
         'role':'Job Role',
         'date_applied': st.column_config.DateColumn("Date Applied"),
         'extracted_skills':'Extracted Skills',
         'deadline': st.column_config.DateColumn("Deadline"),
-        'status' : st.column_config.SelectboxColumn("Status", options=['Applied','Not Applied','Interviewed','Selected','Not Selected'], default="Applied", required=True),
         'notes': 'Notes'
     },
     disabled=['id'],
@@ -32,6 +32,8 @@ edited_df = st.data_editor(
 
 if(st.button("Submit")):
     edits = st.session_state["editor"]
+    def return_edits():
+        return edits
     
     conn = sqlite3.connect("database/job_tracker.db")
     
@@ -106,9 +108,9 @@ if(st.button("Submit")):
         conn.close()
 
     # Reload the data so the editor reflects the database
-    if success:
-        st.success("Changes Updated")
-        st.rerun()
+    # if success:
+    #     st.success("Changes Updated")
+        # st.rerun()
 
 
 st.sidebar.header("First page")

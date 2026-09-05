@@ -11,11 +11,11 @@ def create_table(table_name):
         create table if not exists {table_name}(
         id INTEGER primary key,
         company TEXT NOT NULL,
+        status TEXT,
         role TEXT,
         date_applied text,
         extracted_skills JSON,
         deadline text,
-        status TEXT,
         notes TEXT)
     """)
     conn.commit()
