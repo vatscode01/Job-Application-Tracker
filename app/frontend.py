@@ -32,8 +32,6 @@ edited_df = st.data_editor(
 
 if(st.button("Submit")):
     edits = st.session_state["editor"]
-    def return_edits():
-        return edits
     
     conn = sqlite3.connect("database/job_tracker.db")
     
