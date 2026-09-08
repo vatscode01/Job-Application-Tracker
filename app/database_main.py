@@ -16,19 +16,20 @@ def create_table(table_name):
         date_applied text,
         extracted_skills JSON,
         deadline text,
-        notes TEXT)
+        notes TEXT,
+        job_description TEXT)
     """)
     conn.commit()
 
-def insert_application(company=None, role=None, date_applied=None, extracted_skills=None, deadline=None, status = None, notes= None):
+def insert_application(company=None, role=None, date_applied=None, extracted_skills=None, deadline=None, status = None, notes= None, job_description=None):
 
     if not isinstance(company,str):
         raise TypeError(f"Expected string type but got {type(company).__name__}")
     
     cur.execute("""
-        insert into Applications(company, role, date_applied, extracted_skills, deadline, status, notes)
-        values (?,?,?,?,?,?,?);
-    """,(company, role, date_applied, extracted_skills, deadline, status, notes))
+        insert into Applications(company, role, date_applied, extracted_skills, deadline, status, notes, job_description)
+        values (?,?,?,?,?,?,?,?);
+    """,(company, role, date_applied, extracted_skills, deadline, status, notes, job_description))
     conn.commit() 
 
 def get_applications(id):
@@ -36,8 +37,8 @@ def get_applications(id):
     row = cur.fetchone()
     print(row)
 
-def update_application(id, company, role, date_applied, extracted_skills, deadline, status, notes):
-    cur.execute(f"update Applications set company='{company}',role='{role}', date_applied='{date_applied}', extracted_skills='{extracted_skills}', deadline='{deadline}', status='{status}', notes='{notes}' where id={id};")
+def update_application(id, company, role, date_applied, extracted_skills, deadline, status, notes, job_description):
+    cur.execute(f"update Applications set company='{company}',role='{role}', date_applied='{date_applied}', extracted_skills='{extracted_skills}', deadline='{deadline}', status='{status}', notes='{notes}', job_description='{job_description}' where id={id};")
     conn.commit()
 
 def delete_application(id):
