@@ -9,13 +9,14 @@ deadline = pd.to_datetime(df["deadline"], errors='coerce').dt.date
 days_left = []
 
 st.header("Reminders")
-st.sidebar.header("Reminder Lega")
+st.sidebar.header("Get Reminder and Analytics")
 
 today = date.today()
 for i in range(0,len(deadline)):
     left = deadline.iloc[i] - today
     days_left.append(
         {
+            'id': df['id'].iloc[i],
             "company": df['company'].iloc[i],
             "status": df['status'].iloc[i],
             "days": left.days
@@ -31,23 +32,26 @@ application_follow_up = []
 apply_before_deadline = []
 interview_follow_up = []
 
-for idx in days_left:
 
+for idx in days_left:
+    id = idx['id']
     company = idx['company']
     status = idx['status']
     days = idx['days']
 
     if(status == "Applied" and int(days)>=7):
-        application_follow_up.append({company,days})
+        application_follow_up.append([id,company,days])
     elif (status == "Not Applied" and days<7):
-        apply_before_deadline.append({company,days})
+        apply_before_deadline.append([id,company,days])
     elif(status == "Interviewed" and days>=7):
-        interview_follow_up.append({company,days})
+        interview_follow_up.append([id,company,days])
 
-# st.write(application_follow_up,apply_before_deadline,interview_follow_up)
 st.markdown('Application Follow Up')
-st.dataframe(application_follow_up, width = 'stretch')
+st.write(pd.DataFrame(application_follow_up, columns=['Id','Company','Days Remaining']))
+
 st.markdown('Deadline Approaching')
-st.dataframe(apply_before_deadline, width='stretch')
+st.write(pd.DataFrame(apply_before_deadline, columns=['Id','Company','Days Remaining']))
+# print(apply_before_deadline)
+
 st.markdown('Interview Follow Up')
-st.dataframe(interview_follow_up, width = 'stretch')
+st.write(pd.DataFrame(interview_follow_up, columns=['Id','Company','Days Remaining']))
