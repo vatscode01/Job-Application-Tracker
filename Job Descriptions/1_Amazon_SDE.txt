@@ -1,0 +1,50 @@
+## Amazon SDE I — Job Description
+
+ An **Amazon Software Development Engineer I (SDE I)** is an entry-level software engineering role focused on designing, developing, testing, and maintaining scalable software systems and services.
+
+ ### Key Responsibilities
+
+ - Design, implement, test, deploy, and maintain high-quality software.
+- Work with senior engineers and product teams to understand requirements and deliver features.
+- Write **clean, maintainable, and scalable code** using languages such as Java, Python, C++, or similar.
+- Debug production and development issues and identify root causes.
+- Participate in **code reviews** and improve code quality.
+- Develop unit tests, integration tests, and automated testing solutions.
+- Work with databases, APIs, distributed systems, cloud services, and other engineering technologies.
+- Contribute to system design and technical discussions.
+- Monitor software performance, reliability, and scalability.
+- Learn Amazon's internal tools, processes, and engineering best practices.
+- Collaborate with engineers, product managers, and other stakeholders to deliver customer-focused solutions.
+
+ ### Typical Qualifications
+
+ - Bachelor's degree in **Computer Science, Computer Engineering, or a related technical field**, or equivalent practical experience.
+- Knowledge of at least one programming language such as:
+  - Java
+  - Python
+  - C++
+  - C#
+  - Go
+- Strong understanding of:
+  - **Data Structures and Algorithms**
+  - Object-Oriented Programming
+  - Database fundamentals
+  - Operating systems basics
+  - Computer networks basics
+  - Software development lifecycle
+- Ability to solve programming and debugging problems.
+- Good communication and teamwork skills.
+
+ ### What Amazon Usually Looks For
+
+ For an SDE I position, you should be particularly comfortable with:
+
+ **DSA → Coding → OOP → SQL/Databases → APIs → Basic System Design → Testing/Debugging → AWS/Cloud fundamentals**
+
+ Amazon also places significant emphasis on its **Leadership Principles**, especially **Customer Obsession, Ownership, Dive Deep, Learn and Be Curious, Bias for Action, and Deliver Results**.
+
+ ### Typical Experience Level
+
+ SDE I is generally aimed at **new graduates and early-career software engineers**, although the exact experience requirements vary by job posting and team.
+
+ If you're preparing for an **Amazon SDE I interview**, I can also give you the **complete SDE I preparation roadmap, required DSA topics, Amazon interview rounds, and commonly asked coding questions**.
