@@ -54,11 +54,12 @@ if(st.button("Submit")):
                     continue
                 
                 if column == "job_description" and isinstance(new_value, str) and not new_value.endswith('.txt') and new_value.strip():
+                    id = changes.get('id', df.iloc[row_idx]['id'])
                     company_val = changes.get('company', df.iloc[row_idx]['company'])
                     role_val = changes.get('role', df.iloc[row_idx]['role'])
                     company_val = str(company_val).replace(' ', '_') if company_val else "Unknown"
                     role_val = str(role_val).replace(' ', '_') if role_val else "Unknown"
-                    filename = f"{company_val}_{role_val}.txt"
+                    filename = f"{id}_{company_val}_{role_val}.txt"
                     filepath = os.path.join("Job Descriptions", filename)
                     with open(filepath, "w") as f:
                         f.write(new_value)
@@ -97,11 +98,12 @@ if(st.button("Submit")):
             job_desc_raw = row.get('job_description', '')
             job_desc_filename = ""
             if job_desc_raw and not job_desc_raw.endswith('.txt'):
+                id = row.get('id', 'Unknown')
                 company_val = row.get('company', 'Unknown')
                 role_val = row.get('role', 'Unknown')
                 company_val = str(company_val).replace(' ', '_') if company_val else "Unknown"
                 role_val = str(role_val).replace(' ', '_') if role_val else "Unknown"
-                job_desc_filename = f"{company_val}_{role_val}.txt"
+                job_desc_filename = f"{id}_{company_val}_{role_val}.txt"
                 filepath = os.path.join("Job Descriptions", job_desc_filename)
                 with open(filepath, "w") as f:
                     f.write(job_desc_raw)
