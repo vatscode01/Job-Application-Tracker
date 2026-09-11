@@ -138,7 +138,7 @@ if(st.button("Submit")):
     # Reload the data so the editor reflects the database
     if success:
         st.success("Changes Updated")
-        st.rerun()
+        # st.rerun()
 
 
 st.sidebar.header("First page")

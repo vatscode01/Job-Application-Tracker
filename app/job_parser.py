@@ -24,8 +24,7 @@ for i in range(len(df)):
     comp_name = df['company'].iloc[i]
     role = df['role'].iloc[i]
 
-    if not role:
-        role = 'Unknown'
+    role = str(role).replace(' ', '_') if role else "Unknown"
 
     path = os.path.join(filepath, f"{id}_{comp_name}_{role}.txt")
 
@@ -41,4 +40,5 @@ for i in range(len(df)):
 
     company_skillset[int(id)] = skillset
 
-print(company_skillset)
+def extract_info():
+    return company_skillset

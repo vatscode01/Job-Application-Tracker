@@ -1,0 +1,110 @@
+## Microsoft Azure Developer — Job Description
+
+ A **Microsoft Azure Developer** is responsible for designing, developing, deploying, and maintaining applications and services that run on **Microsoft Azure**. The role typically involves cloud-native development, APIs, databases, serverless computing, DevOps, security, and monitoring.
+
+ ### Key Responsibilities
+
+ - Design and develop scalable applications using **Microsoft Azure** services.
+- Build, deploy, and maintain cloud-based applications and APIs.
+- Develop REST APIs and integrate applications with internal and external systems.
+- Work with Azure compute services such as:
+  - Azure App Service
+  - Azure Functions
+  - Azure Kubernetes Service (AKS)
+  - Azure Virtual Machines
+- Work with Azure storage and databases such as:
+  - Azure SQL Database
+  - Azure Cosmos DB
+  - Azure Storage
+  - Azure Database services
+- Implement authentication and authorization using **Microsoft Entra ID (Azure AD)**.
+- Develop event-driven and asynchronous applications using services such as **Azure Service Bus** and Event Grid.
+- Use **Azure Key Vault** for securely managing secrets, keys, and certificates.
+- Set up CI/CD pipelines using **Azure DevOps** or GitHub Actions.
+- Monitor application health and performance using **Azure Monitor** and Application Insights.
+- Troubleshoot application, deployment, networking, and performance issues.
+- Implement cloud security, scalability, reliability, and cost-optimization practices.
+- Participate in code reviews, technical design discussions, testing, and documentation.
+- Collaborate with software engineers, DevOps engineers, architects, product managers, and other stakeholders.
+
+ ### Technical Skills
+
+ A strong Azure Developer should typically know:
+
+ **Programming**
+
+ - C# / .NET is particularly common in Microsoft environments.
+- Java, Python, JavaScript/TypeScript, or other languages may also be used.
+
+ **Azure**
+
+ - Azure App Service
+- Azure Functions
+- Azure Storage
+- Azure SQL
+- Cosmos DB
+- Azure Service Bus
+- Azure Key Vault
+- Azure Monitor / Application Insights
+- Azure Kubernetes Service (AKS)
+- Microsoft Entra ID
+
+ **Development**
+
+ - Object-Oriented Programming
+- Data Structures and Algorithms
+- REST APIs
+- Microservices
+- JSON
+- SQL
+- Git
+- Unit and integration testing
+
+ **DevOps**
+
+ - CI/CD
+- Azure DevOps
+- GitHub Actions
+- Docker
+- Kubernetes
+- Infrastructure as Code concepts
+
+ ### Typical Qualifications
+
+ - Bachelor's degree in Computer Science, Information Technology, Engineering, or a related field.
+- Experience with at least one programming language.
+- Understanding of software development principles and SDLC.
+- Experience building or deploying applications in Azure.
+- Knowledge of relational databases and SQL.
+- Understanding of REST APIs and web services.
+- Familiarity with Git and CI/CD.
+- Good problem-solving and debugging skills.
+- Understanding of cloud security and identity concepts.
+
+ ### For an Entry-Level Azure Developer
+
+ If you're targeting a **fresher/0–2 years Azure Developer role**, I'd prioritize:
+
+ **C#/.NET → OOP → SQL → REST APIs → Git → Azure Fundamentals → App Service → Azure Functions → Azure SQL → Storage → Entra ID → Key Vault → Service Bus → CI/CD → Docker**
+
+ You **don't need to master every Azure service** before applying. Strong programming fundamentals plus practical experience building and deploying one or two Azure projects can be much more valuable.
+
+ ### Azure Developer vs Amazon SDE I
+
+ If you're deciding between the two career paths:
+
+ | Area | Amazon SDE I | Azure Developer |
+| --- | --- | --- |
+| Main focus | Software engineering | Cloud application development |
+| DSA importance | **Very high** | Medium |
+| Programming | **Very high** | **Very high** |
+| Cloud | Useful/important | **Core requirement** |
+| System design | Basic → intermediate | Basic → intermediate |
+| DevOps | Useful | **Important** |
+| Azure | Not required | **Core skill** |
+| AWS | Often useful | Not required |
+| APIs | Important | **Very important** |
+| Databases | Important | **Very important** |
+| Kubernetes/Docker | Team-dependent | Frequently useful |
+
+If your goal is to **get hired as quickly as possible**, the two roles have somewhat different preparation strategies: **Amazon SDE I is more DSA/interview-heavy, while Azure Developer is more cloud + development \+ practical-project-heavy.**
