@@ -47,11 +47,11 @@ for idx in days_left:
         interview_follow_up.append([id,company,days])
 
 st.markdown('Application Follow Up')
-st.write(pd.DataFrame(application_follow_up, columns=['Id','Company','Days Remaining']))
+st.write(pd.DataFrame(application_follow_up, columns=['Id','Company','Days Past']))
 
 st.markdown('Deadline Approaching')
 st.write(pd.DataFrame(apply_before_deadline, columns=['Id','Company','Days Remaining']))
 # print(apply_before_deadline)
 
 st.markdown('Interview Follow Up')
-st.write(pd.DataFrame(interview_follow_up, columns=['Id','Company','Days Remaining']))
+st.write(pd.DataFrame(interview_follow_up, columns=['Id','Company','Days Past']))
