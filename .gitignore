@@ -1,3 +1,4 @@
 env
 __pychache__
 database
+api_key.env
