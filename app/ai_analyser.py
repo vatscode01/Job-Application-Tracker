@@ -14,29 +14,44 @@ load_dotenv("api_key.env")
 api_key = os.getenv("gemini_api_key")
 client = genai.Client(api_key=api_key)
 
-def parse_resume(job_description: str):
+def parse_resume(job_description):
     resume_path = "/Users/aady/Desktop/Ayush Vats/Projects/Job Application Tracker/database/resume.pdf"
-    resume_file = client.files.upload(resume_path)
-    jd_file = client.files.upload(job_description)
+    resume_file = client.files.upload(file = resume_path)
+    jd_file = client.files.upload(file = job_description)
 
-    interaction = client.interactions.create(
-        model = "gemini-3.8-flash",
-        input = [
-            {"type" : "text" , "text" : "Given my resume and a job description. Find all the skillset from this pdf also analyse this from the given job description. Find all the matching skillset with the job description and this resume."},
-            {
-                "type": "file",
-                "uri" : jd_file.uri,
-                "mime_type": jd_file.mime_type,
-            },
-            {
-                "type": "file",
-                "uri": resume_file.uri,
-                "mime_type": resume_file.mime_type,
-            }
+    # interaction = client.interactions.create(
+    #     model = "gemini-3.8-flash",
+    #     input = [
+    #         {
+    #             "type": "file_uri",
+    #             "uri" : jd_file.uri,
+    #             "mime_type": jd_file.mime_type,
+    #         },
+    #         {
+    #             "type": "file_uri",
+    #             "uri": resume_file.uri,
+    #             "mime_type": resume_file.mime_type,
+    #         },
+    #         {
+    #             "type" : "text" ,
+    #             "text" : "Given my resume and a job description. Find all the skillset from this pdf also analyse this from the given job description. Find all the matching skillset with the job description and this resume."
+    #         }
+    #     ]
+    # )
+
+    response = client.models.generate_content(
+        model = "gemini-3.5-flash",
+        contents = [
+            jd_file,
+            resume_file,
+            (
+                "Given my resume and a job description. Find all the skillset from this pdf also analyse this from the given job description. Find all the matching skillset with the job description and this resume."
+            )
         ]
     )
-    print(interaction.outputs[-1].text)
-    st.write(interaction.outputs[-1].text)
+    while(not response.text):
+        st.write("Loading")
+    st.write(response.text)
 
 #-----------------------------------
 # Analytics Dashboard
@@ -50,8 +65,11 @@ if not df.empty:
     selected_id = int(selected_option.split(" - ")[0])
     selected_row = df[df['id'] == selected_id].iloc[0]
     filename = selected_row['job_description']
-    filepath = os.path.join("Job Descriptions", filename)
+    filepath = os.path.join("Job Descriptions", str(filename))
 
     st.header(selected_row['company'] + "(" + selected_row['role'] + ")" " Job Insights")
-    parse_resume(filepath)
+    if os.path.exists(filepath):
+        parse_resume(filepath)
+    else:
+        st.write("Upload valid file")
 
