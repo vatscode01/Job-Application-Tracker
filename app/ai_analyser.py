@@ -1,7 +1,6 @@
 from google import genai
 import os
 from dotenv import load_dotenv
-from job_parser import extract_info
 from read_application import get_applications
 import streamlit as st
 
@@ -35,10 +34,10 @@ def parse_resume(job_description):
         )
     st.write(response.text)
 
+    
 #-----------------------------------
 # Analytics Dashboard
 #-----------------------------------
-
 df = get_applications()
 
 if not df.empty:
