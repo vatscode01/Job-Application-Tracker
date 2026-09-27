@@ -1,9 +1,12 @@
 import streamlit as st
 
-frontend_path = "/Users/aady/Desktop/Ayush Vats/Projects/Job Application Tracker/app/frontend.py"
-reminders_path = "/Users/aady/Desktop/Ayush Vats/Projects/Job Application Tracker/app/reminders.py"
-analytics_path = "/Users/aady/Desktop/Ayush Vats/Projects/Job Application Tracker/app/analytics.py"
-ai_analytics_path = "/Users/aady/Desktop/Ayush Vats/Projects/Job Application Tracker/app/ai_analyser.py"
+import os
+
+base_dir = os.path.dirname(__file__)
+frontend_path = os.path.join(base_dir, "frontend.py")
+reminders_path = os.path.join(base_dir, "reminders.py")
+analytics_path = os.path.join(base_dir, "analytics.py")
+ai_analytics_path = os.path.join(base_dir, "ai_analyser.py")
 
 frontend = st.Page(frontend_path, title="Main Page")
 reminder = st.Page(reminders_path, title = "Reminders")

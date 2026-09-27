@@ -17,7 +17,7 @@ edited_df = st.data_editor(
     data = df,
     hide_index=True,
     column_config={
-        'id': 'ID',
+        'id': 'ID', 
         'company': st.column_config.Column("Company", required=True,),
         'status' : st.column_config.SelectboxColumn("Status", options=['Applied','Not Applied','Interviewed','Selected','Not Selected'], default="Applied", required=True),
         'role':'Job Role',

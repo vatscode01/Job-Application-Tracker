@@ -14,7 +14,13 @@ api_key = os.getenv("gemini_api_key")
 client = genai.Client(api_key=api_key)
 
 def parse_resume(job_description):
-    resume_path = "/Users/aady/Desktop/Ayush Vats/Projects/Job Application Tracker/database/resume.pdf"
+    # Determine the project root (one level up from this script's directory)
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(current_dir)
+
+    print(current_dir, project_root)
+    
+    resume_path = os.path.join(project_root, "database", "resume.pdf")
     resume_file = client.files.upload(file = resume_path)
     jd_file = client.files.upload(file = job_description)
 
@@ -34,7 +40,7 @@ def parse_resume(job_description):
         )
     st.write(response.text)
 
-    
+
 #-----------------------------------
 # Analytics Dashboard
 #-----------------------------------
@@ -46,7 +52,10 @@ if not df.empty:
     selected_id = int(selected_option.split(" - ")[0])
     selected_row = df[df['id'] == selected_id].iloc[0]
     filename = selected_row['job_description']
-    filepath = os.path.join("Job Descriptions", str(filename))
+    
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(current_dir)
+    filepath = os.path.join(project_root, "Job Descriptions", str(filename))
 
     st.header(selected_row['company'] + "(" + selected_row['role'] + ")" " Job Insights")
     if os.path.exists(filepath):

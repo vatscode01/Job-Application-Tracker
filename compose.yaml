@@ -1,6 +1,10 @@
 services:
-  server:
+  app:
     build:
       context: .
     ports:
-      - 8000:8000
+      - "8501:8501"
+    env_file:
+      - api_key.env
+    volumes:
+      - ./database:/app/database

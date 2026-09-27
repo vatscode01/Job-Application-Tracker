@@ -1,4 +1,7 @@
 venv
-__pychache__
-api_key.evn
+env
+__pycache__
+api_key.env
 database
+.git
+.vscode
